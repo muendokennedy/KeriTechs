@@ -21,4 +21,16 @@ class CustomerController extends Controller
     {
        return Inertia::render('Products');
     }
+    public function contact()
+    {
+       return Inertia::render('Contact');
+    }
+    public function cart()
+    {
+       return Inertia::render('Cart');
+    }
+    public function productpage()
+    {
+       return Inertia::render('ProductPage');
+    }
 }
