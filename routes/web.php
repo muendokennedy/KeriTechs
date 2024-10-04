@@ -16,6 +16,12 @@ Route::get('/productpage', [CustomerController::class, 'productpage'])->name('cu
 
 Route::prefix('admin')->group(function(){
     Route::get('/dashboard', [AdminController::class, 'adminHome'])->name('admin.dashboard');
+    Route::get('/analytics', [AdminController::class, 'adminAnalytics'])->name('admin.analytics');
+    Route::get('/products', [AdminController::class, 'adminProducts'])->name('admin.products');
+    Route::get('/orders', [AdminController::class, 'adminOrders'])->name('admin.orders');
+    Route::get('/stock', [AdminController::class, 'adminStock'])->name('admin.stock');
+    Route::get('/clientinfo', [AdminController::class, 'adminClientinfo'])->name('admin.clientinfo');
+    Route::get('/settings', [AdminController::class, 'adminSettings'])->name('admin.settings');
 });
 
 Route::get('/dashboard', function () {

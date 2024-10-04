@@ -13,4 +13,28 @@ class AdminController extends Controller
     {
         return Inertia::render('Admin/AdminHome');
     }
+    public function adminAnalytics()
+    {
+        return Inertia::render('Admin/AdminAnalytics');
+    }
+    public function adminProducts()
+    {
+       return Inertia::render('Admin/AdminProducts');
+    }
+    public function adminOrders()
+    {
+       return Inertia::render('Admin/AdminOrders');
+    }
+    public function adminStock()
+    {
+       return Inertia::render('Admin/AdminStock');
+    }
+    public function adminClientinfo()
+    {
+       return Inertia::render('Admin/AdminClientInfo');
+    }
+    public function adminSettings()
+    {
+       return Inertia::render('Admin/AdminSettings');
+    }
 }
