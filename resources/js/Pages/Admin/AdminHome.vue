@@ -1,4 +1,5 @@
 <script setup>
+import { Link } from '@inertiajs/vue3'
 
 </script>
 
@@ -9,7 +10,7 @@
         <h2 class="side-bar-title text-white font-bold text-2xl text-center capitalize my-4">moTech</h2>
         <ul class="my-8 text-white px-4 space-y-2 capitalize">
           <li><a href="index.html"><i class="fa-solid fa-house px-4 py-2 text-xl"></i><span>dashboard</span></a></li>
-          <li><a href="analytics.html"><i class="fa-solid fa-chart-simple px-4 py-2 text-xl"></i><span>analytics</span></a></li>
+          <li><Link :href="route('admin.analytics')"><i class="fa-solid fa-chart-simple px-4 py-2 text-xl"></i><span>analytics</span></Link></li>
           <li><a href="products.html"><i class="fa-solid fa-box px-4 py-2 text-xl"></i><span>products</span></a></li>
           <li><a href="orders.html"><i class="fa-solid fa-list px-4 py-2 text-xl"></i><span>orders</span></a></li>
           <li><a href="stock.html"><i class="fa-solid fa-database px-4 py-2 text-xl"></i><span>stock</span></a></li>

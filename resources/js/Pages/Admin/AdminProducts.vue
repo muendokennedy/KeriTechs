@@ -35,7 +35,7 @@
         </div>
         <div class="profile-section sm:ml-auto lg:ml-0 border-2 flex items-center rounded-md w-36 sm:w-64 justify-between">
           <div class="profile-pic h-[48px] w-[70px] p-1">
-            <img src="images/man4.jpeg" alt="profile image" class="w-full h-full object-cover rounded-l-md">
+            <img src="/images/man4.jpeg" alt="profile image" class="w-full h-full object-cover rounded-l-md">
           </div>
           <span class="sm:pr-2 text-xs sm:text-base">Kennedy Munyao</span>
         </div>
@@ -59,7 +59,7 @@
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">Laptop</td>
                   <td class="border-2 py-2 px-2 text-center">Dell latitude 5320</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="images/dell latitude 5320.png" alt="A dell laptop" class="h-14 w-auto"></td>
+                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/dell latitude 5320.png" alt="A dell laptop" class="h-14 w-auto"></td>
                   <td class="border-2 py-2 px-2 text-center">$1500</td>
                   <td class="border-2 py-2 px-2 text-center">$1000</td>
                   <td class="border-2 py-2 px-2 text-center">Dell</td>
@@ -67,7 +67,7 @@
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">Laptop</td>
                   <td class="border-2 py-2 px-2 text-center">HP laptop 15 ci7</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="images/hp laptop 15 ci7.png" alt="An HP  laptop" class="h-14 w-auto"></td>
+                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/hp laptop 15 ci7.png" alt="An HP  laptop" class="h-14 w-auto"></td>
                   <td class="border-2 py-2 px-2 text-center">$800</td>
                   <td class="border-2 py-2 px-2 text-center">$600</td>
                   <td class="border-2 py-2 px-2 text-center">HP</td>
@@ -75,7 +75,7 @@
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">Phone</td>
                   <td class="border-2 py-2 px-2 text-center">Iphone 14</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="images/iphone14.png" alt="An iphone14" class="h-14 w-auto"></td>
+                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/iphone14.png" alt="An iphone14" class="h-14 w-auto"></td>
                   <td class="border-2 py-2 px-2 text-center">$1100</td>
                   <td class="border-2 py-2 px-2 text-center">$1102</td>
                   <td class="border-2 py-2 px-2 text-center">Apple</td>
@@ -83,7 +83,7 @@
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">Phone</td>
                   <td class="border-2 py-2 px-2 text-center">Iphone 12</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="images/iphone12.png" alt="An Iphone12" class="h-14 w-auto"></td>
+                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/iphone12.png" alt="An Iphone12" class="h-14 w-auto"></td>
                   <td class="border-2 py-2 px-2 text-center">$1000</td>
                   <td class="border-2 py-2 px-2 text-center">$900</td>
                   <td class="border-2 py-2 px-2 text-center">Apple</td>
@@ -91,7 +91,7 @@
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">Laptop</td>
                   <td class="border-2 py-2 px-2 text-center">HP laptop 15 ci7</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="images/hp laptop 15 ci7.png" alt="An HP  laptop" class="h-14 w-auto"></td>
+                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/hp laptop 15 ci7.png" alt="An HP  laptop" class="h-14 w-auto"></td>
                   <td class="border-2 py-2 px-2 text-center">$800</td>
                   <td class="border-2 py-2 px-2 text-center">$600</td>
                   <td class="border-2 py-2 px-2 text-center">HP</td>
@@ -99,7 +99,7 @@
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">Phone</td>
                   <td class="border-2 py-2 px-2 text-center">Iphone 14</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="images/iphone14.png" alt="An iphone14" class="h-14 w-auto"></td>
+                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/iphone14.png" alt="An iphone14" class="h-14 w-auto"></td>
                   <td class="border-2 py-2 px-2 text-center">$1100</td>
                   <td class="border-2 py-2 px-2 text-center">$1102</td>
                   <td class="border-2 py-2 px-2 text-center">Apple</td>
@@ -107,7 +107,7 @@
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">Phone</td>
                   <td class="border-2 py-2 px-2 text-center">Iphone 12</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="images/iphone12.png" alt="An Iphone12" class="h-14 w-auto"></td>
+                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/iphone12.png" alt="An Iphone12" class="h-14 w-auto"></td>
                   <td class="border-2 py-2 px-2 text-center">$1000</td>
                   <td class="border-2 py-2 px-2 text-center">$900</td>
                   <td class="border-2 py-2 px-2 text-center">Apple</td>

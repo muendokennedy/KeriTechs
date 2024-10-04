@@ -34,7 +34,7 @@
         </div>
         <div class="profile-section sm:ml-auto lg:ml-0 border-2 flex items-center rounded-md w-36 sm:w-64 justify-between">
           <div class="profile-pic h-[48px] w-[70px] p-1">
-            <img src="images/man4.jpeg" alt="profile image" class="w-full h-full object-cover rounded-l-md">
+            <img src="/images/man4.jpeg" alt="profile image" class="w-full h-full object-cover rounded-l-md">
           </div>
           <span class="sm:pr-2 text-xs sm:text-base">Kennedy Munyao</span>
         </div>
@@ -56,25 +56,25 @@
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">Kennedy Muendo</td>
                   <td class="border-2 py-2 px-2 text-center">kennedymuendo@gmail.com</td>
-                  <td class="border-2 py-2 px-2 text-center sm:px-4 md:translate-x-4 lg:translate-x-6"><img src="images/man4.jpeg" alt="An Iphone12" class="h-16 w-16 rounded-full object-cover"></td>
+                  <td class="border-2 py-2 px-2 text-center sm:px-4 md:translate-x-4 lg:translate-x-6"><img src="/images/man4.jpeg" alt="An Iphone12" class="h-16 w-16 rounded-full object-cover"></td>
                   <td class="border-2 py-2 px-2 text-center"><button type="button" class="text-white bg-green-700 px-4 rounded-md py-2">Primary admin</button></td>
                 </tr>
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">Kennedy Muendo</td>
                   <td class="border-2 py-2 px-2 text-center">kennedymuendo@gmail.com</td>
-                  <td class="border-2 py-2 px-2 text-center sm:px-4 md:translate-x-4 lg:translate-x-6"><img src="images/man4.jpeg" alt="An Iphone12" class="h-16 w-16 rounded-full object-cover"></td>
+                  <td class="border-2 py-2 px-2 text-center sm:px-4 md:translate-x-4 lg:translate-x-6"><img src="/images/man4.jpeg" alt="An Iphone12" class="h-16 w-16 rounded-full object-cover"></td>
                   <td class="border-2 py-2 px-2 text-center"><button type="button" class="text-white bg-[#042EFF] px-4 rounded-md py-2">Secondary admin</button></td>
                 </tr>
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">Kennedy Muendo</td>
                   <td class="border-2 py-2 px-2 text-center">kennedymuendo@gmail.com</td>
-                  <td class="border-2 py-2 px-2 text-center sm:px-4 md:translate-x-4 lg:translate-x-6"><img src="images/man4.jpeg" alt="An Iphone12" class="h-16 w-16 rounded-full object-cover"></td>
+                  <td class="border-2 py-2 px-2 text-center sm:px-4 md:translate-x-4 lg:translate-x-6"><img src="/images/man4.jpeg" alt="An Iphone12" class="h-16 w-16 rounded-full object-cover"></td>
                   <td class="border-2 py-2 px-2 text-center"><button type="button" class="text-white bg-[#042EFF] px-4 rounded-md py-2">Secondary admin</button></td>
                 </tr>
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">Kennedy Muendo</td>
                   <td class="border-2 py-2 px-2 text-center">kennedymuendo@gmail.com</td>
-                  <td class="border-2 py-2 px-2 text-center sm:px-4 md:translate-x-4 lg:translate-x-6"><img src="images/man4.jpeg" alt="An Iphone12" class="h-16 w-16 rounded-full object-cover"></td>
+                  <td class="border-2 py-2 px-2 text-center sm:px-4 md:translate-x-4 lg:translate-x-6"><img src="/images/man4.jpeg" alt="An Iphone12" class="h-16 w-16 rounded-full object-cover"></td>
                   <td class="border-2 py-2 px-2 text-center"><button type="button" class="text-white bg-[#042EFF] px-4 rounded-md py-2">Secondary admin</button></td>
                 </tr>
               </tbody>
