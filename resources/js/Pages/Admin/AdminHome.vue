@@ -2,6 +2,9 @@
 import AdminSidebar from '@/Components/app/AdminSidebar.vue'
 import AdminHeader from '@/Components/app/AdminHeader.vue'
 
+import { ArrowUpIcon, ArrowDownIcon } from '@heroicons/vue/24/solid'
+
+
 </script>
 
 <template>
@@ -14,10 +17,10 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
             <div class="left space-y-2">
               <h3 class="text-base font-semibold text-[#042EFF]">orders</h3>
               <h1 class="text-2xl font-semibold">40,876</h1>
-              <i class="fa-solid fa-arrow-up inline-block h-8 w-8 text-center leading-8 rounded-full bg-[#B5FFD5] text-[#042EFF]"></i>
+              <ArrowUpIcon class="size-8 font-extrabold text-center leading-8 p-2 rounded-full bg-[#B5FFD5] text-[#042EFF]"/>
             </div>
             <div class="right flex flex-col gap-4 items-center">
-              <span class="h-14 w-14 rounded-md bg-[#B5FFD5] text-center fa-solid fa-arrow-up leading-[3.5rem] text-3xl text-[#042EFF]"></span>
+            <ArrowUpIcon class="size-14 p-2 rounded-md bg-[#B5FFD5] text-center leading-[3.5rem] text-3xl text-[#042EFF]"/>
               <span class="text-sm">Up from yesterday</span>
             </div>
           </div>
@@ -25,32 +28,32 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
             <div class="left space-y-2">
               <h3 class="text-base font-semibold text-[#042EFF]">analytics</h3>
               <h1 class="text-2xl font-semibold">100,456</h1>
-              <i class="fa-solid fa-arrow-up inline-block h-8 w-8 text-center leading-8 rounded-full bg-[#B5FFD5] text-[#042EFF]"></i>
+              <ArrowUpIcon class="size-8 font-extrabold text-center leading-8 p-2 rounded-full bg-[#B5FFD5] text-[#042EFF]"/>
             </div>
             <div class="right flex flex-col gap-4 items-center">
-              <span class="h-14 w-14 rounded-md bg-[#B5FFD5] text-center fa-solid fa-arrow-up leading-[3.5rem] text-3xl text-[#042EFF]"></span>
-              <span class="text-sm">Up from yesterday</span>
+            <ArrowUpIcon class="size-14 p-2 rounded-md bg-[#B5FFD5] text-center leading-[3.5rem] text-3xl text-[#042EFF]"/>
+            <span class="text-sm">Up from yesterday</span>
             </div>
           </div>
           <div class="box flex gap-4  bg-white p-4 rounded-md">
             <div class="left space-y-2">
               <h3 class="text-base font-semibold text-[#042EFF]">products</h3>
               <h1 class="text-2xl font-semibold">40,876</h1>
-              <i class="fa-solid fa-arrow-up inline-block h-8 w-8 text-center leading-8 rounded-full bg-[#B5FFD5] text-[#042EFF]"></i>
+              <ArrowUpIcon class="size-8 font-extrabold text-center leading-8 p-2 rounded-full bg-[#B5FFD5] text-[#042EFF]"/>
             </div>
             <div class="right flex flex-col gap-4 items-center">
-              <span class="h-14 w-14 rounded-md bg-[#B5FFD5] text-center fa-solid fa-arrow-up leading-[3.5rem] text-3xl text-[#042EFF]"></span>
-              <span class="text-sm">Up from yesterday</span>
+            <ArrowUpIcon class="size-14 p-2 rounded-md bg-[#B5FFD5] text-center leading-[3.5rem] text-3xl text-[#042EFF]"/>
+            <span class="text-sm">Up from yesterday</span>
             </div>
           </div>
           <div class="box flex gap-4  bg-white p-4 rounded-md">
             <div class="left space-y-2">
               <h3 class="text-base font-semibold text-[#042EFF]">stock</h3>
               <h1 class="text-2xl font-semibold">40,876</h1>
-              <i class="fa-solid fa-arrow-down inline-block h-8 w-8 text-center leading-8 rounded-full bg-[#FBE4DD] text-[#FF4004]"></i>
+              <ArrowUpIcon class="size-8 font-extrabold text-center leading-8 p-2 rounded-full bg-[#FBE4DD] text-[#FF4004]"/>
             </div>
             <div class="right flex flex-col gap-4 items-center">
-              <span class="h-14 w-14 rounded-md bg-[#FBE4DD] text-center fa-solid fa-arrow-down leading-[3.5rem] text-3xl text-[#FF4004]"></span>
+            <ArrowUpIcon class="size-14 p-2 rounded-md bg-[#FBE4DD] text-center leading-[3.5rem] text-3xl text-[#FF4004]"/>
               <span class="text-sm">down from yesterday</span>
             </div>
           </div>
