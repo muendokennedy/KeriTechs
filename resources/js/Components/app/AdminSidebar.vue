@@ -1,0 +1,25 @@
+<script setup>
+import { Link } from '@inertiajs/vue3'
+</script>
+<template>
+    <input type="checkbox" id="menu-bar" class="hidden">
+    <div class="z-50 side-bar fixed left-0 min-h-screen w-[15rem] bg-[#042EFF] py-4 flex flex-col justify-between">
+      <div class="sidebar-primary-box">
+        <h2 class="side-bar-title text-white font-bold text-2xl text-center capitalize my-4">moTech</h2>
+        <ul class="my-8 text-white px-4 space-y-2 capitalize">
+          <li><Link :href="route('admin.dashboard')"><i class="fa-solid fa-house px-4 py-2 text-xl"></i><span>dashboard</span></Link></li>
+          <li><Link :href="route('admin.analytics')"><i class="fa-solid fa-chart-simple px-4 py-2 text-xl"></i><span>analytics</span></Link></li>
+          <li><Link :href="route('admin.products')"><i class="fa-solid fa-box px-4 py-2 text-xl"></i><span>products</span></Link></li>
+          <li><Link :href="route('admin.orders')"><i class="fa-solid fa-list px-4 py-2 text-xl"></i><span>orders</span></Link></li>
+          <li><Link :href="route('admin.stock')"><i class="fa-solid fa-database px-4 py-2 text-xl"></i><span>stock</span></Link></li>
+          <li><Link :href="route('admin.clientinfo')"><i class="fa-solid fa-user px-4 py-2 text-xl"></i><span>client info</span></Link></li>
+          <li><Link :href="route('admin.settings')"><i class="fa-solid fa-gear px-4 py-2 text-xl"></i><span>settings</span></Link></li>
+        </ul>
+      </div>
+      <div class="side-bar-bottom my-4 text-white px-4 space-y-2 capitalize">
+        <ul>
+          <li><a href="logout.html"><i class="fa-solid fa-right-from-bracket px-4 py-2 text-xl"></i><span>log out</span></a></li>
+        </ul>
+      </div>
+    </div>
+</template>
