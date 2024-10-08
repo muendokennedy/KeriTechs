@@ -1,6 +1,34 @@
 <script setup>
 import AdminSidebar from '@/Components/app/AdminSidebar.vue'
 import AdminHeader from '@/Components/app/AdminHeader.vue'
+import { ref } from 'vue'
+import { PencilSquareIcon, TrashIcon, CloudArrowUpIcon } from '@heroicons/vue/24/solid'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+
+import {
+  TransitionRoot,
+  TransitionChild,
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+} from '@headlessui/vue'
+
+const isOpen = ref(true)
+
+function closeModal() {
+  isOpen.value = false
+}
+function openModal() {
+  console.log('This button is already clicked')
+  isOpen.value = true
+}
+
+const editor = ClassicEditor
+
+const editorConfig = {
+    toolbar: ['heading', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote']
+}
 
 </script>
 
@@ -96,8 +124,8 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
                   <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
+                      <button type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
+                      <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
                     </div>
                   </td>
                 </tr>
@@ -105,8 +133,8 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
                   <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
+                        <button type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
+                        <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
                     </div>
                   </td>
                 </tr>
@@ -114,8 +142,8 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
                   <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
+                        <button type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
+                        <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
                     </div>
                   </td>
                 </tr>
@@ -123,8 +151,8 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
                   <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
+                        <button type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
+                        <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
                     </div>
                   </td>
                 </tr>
@@ -132,8 +160,8 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
                   <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
+                        <button type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
+                        <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
                     </div>
                   </td>
                 </tr>
@@ -141,8 +169,8 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
                   <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
+                        <button type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
+                        <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
                     </div>
                   </td>
                 </tr>
@@ -150,8 +178,8 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
                   <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
+                        <button type="button" @click="openModal" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
+                        <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
                     </div>
                   </td>
                 </tr>
@@ -194,7 +222,9 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
                 <div class="input-box1 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
                   <div class="original-info1 flex items-center justify-center flex-col">
                     <div class="icon pt-4">
-                      <label for="productImage1" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
+                      <label for="productImage1" class="text-4xl text-[#042EFF]">
+                        <CloudArrowUpIcon class="size-8"/>
+                      </label>
                     </div>
                     <div class="initial-info">
                       <label for="productImage1" class="block py-2">Browse image:</label>
@@ -205,7 +235,9 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
                 <div class="input-box2 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
                   <div class="original-info2 flex items-center justify-center flex-col">
                     <div class="icon pt-4">
-                      <label for="productImage2" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
+                      <label for="productImage2" class="text-4xl text-[#042EFF]">
+                        <CloudArrowUpIcon class="size-8"/>
+                      </label>
                     </div>
                     <div class="initial-info">
                       <label for="productImage2" class="block py-2">Browse image:</label>
@@ -216,7 +248,9 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
                 <div class="input-box3 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
                   <div class="original-info3 flex items-center justify-center flex-col">
                     <div class="icon pt-4">
-                      <label for="productImage3" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
+                      <label for="productImage3" class="text-4xl text-[#042EFF]">
+                        <CloudArrowUpIcon class="size-8"/>
+                      </label>
                     </div>
                     <div class="initial-info">
                       <label for="productImage3" class="block py-2">Browse image:</label>
@@ -227,7 +261,9 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
                 <div class="input-box4 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
                   <div class="original-info4 flex items-center justify-center flex-col">
                     <div class="icon pt-4">
-                      <label for="productImage4" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
+                      <label for="productImage4" class="text-4xl text-[#042EFF]">
+                        <CloudArrowUpIcon class="size-8"/>
+                      </label>
                     </div>
                     <div class="initial-info">
                       <label for="productImage4" class="block py-2">Browse image:</label>
@@ -249,7 +285,8 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
               <div class="form-row">
                 <div class="input-box">
                   <label for="product-description" class="block py-3">Type the product description:</label>
-                  <textarea name="productDescription" id="product-description" cols="30" rows="10" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus></textarea>
+                  <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
+                  <!--<textarea name="productDescription" id="product-description" cols="30" rows="10" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus></textarea>---->
                 </div>
               </div>
               <button type="submit" class="capitalize px-4 py-2 bg-[#042EFF] rounded-md text-white my-4">add product</button>
@@ -258,10 +295,44 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
         </div>
       </main>
     </section>
-    <div class="edit-product bg-white p-4 rounded-md my-4 absolute z-10 top-10 left-24 sm:left-32 lg:left-40 w-3/4 md:w-4/5">
-      <div class="close flex justify-end px-3"><i class="fa-solid fa-times text-2xl p-2 cursor-pointer"></i></div>
-      <h2 class="text-[rgb(4,46,255)] text-base md:text-xl font-semibold py-4 capitalize">Edit this product</h2>
-      <div class="edit-product-form">
+  <TransitionRoot appear :show="isOpen" as="template">
+    <Dialog as="div" @close="closeModal" class="relative z-50">
+      <TransitionChild
+        as="template"
+        enter="duration-300 ease-out"
+        enter-from="opacity-0"
+        enter-to="opacity-100"
+        leave="duration-200 ease-in"
+        leave-from="opacity-100"
+        leave-to="opacity-0"
+      >
+        <div class="fixed inset-0 bg-black/25" />
+      </TransitionChild>
+
+      <div class="fixed inset-0 overflow-y-auto">
+        <div
+          class="flex min-h-full items-center justify-center p-4 text-center"
+        >
+          <TransitionChild
+            as="template"
+            enter="duration-300 ease-out"
+            enter-from="opacity-0 scale-95"
+            enter-to="opacity-100 scale-100"
+            leave="duration-200 ease-in"
+            leave-from="opacity-100 scale-100"
+            leave-to="opacity-0 scale-95"
+          >
+            <DialogPanel
+              class="w-full ml-48 transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
+            >
+              <DialogTitle
+                as="h3"
+                class="text-[rgb(4,46,255)] text-base md:text-xl font-semibold py-4 capitalize"
+              >
+                Edit this product
+              </DialogTitle>
+              <div>
+                <div class="edit-product-form">
         <form action="#">
           <div class="form-row w-full flex flex-col md:flex-row justify-between">
             <div class="input-box md:basis-[48%]">
@@ -293,7 +364,9 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
             <div class="input-box1-edit md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
               <div class="original-info1-edit flex items-center justify-center flex-col">
                 <div class="icon pt-4">
-                  <label for="productImage1-edit" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
+                  <label for="productImage2" class="text-4xl text-[#042EFF]">
+                        <CloudArrowUpIcon class="size-8"/>
+                  </label>
                 </div>
                 <div class="initial-info">
                   <label for="productImage1-edit" class="block py-2">Browse image:</label>
@@ -304,7 +377,9 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
             <div class="input-box2-edit md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
               <div class="original-info2-edit flex items-center justify-center flex-col">
                 <div class="icon pt-4">
-                  <label for="productImage2-edit" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
+                  <label for="productImage2" class="text-4xl text-[#042EFF]">
+                        <CloudArrowUpIcon class="size-8"/>
+                  </label>
                 </div>
                 <div class="initial-info">
                   <label for="productImage2-edit" class="block py-2">Browse image:</label>
@@ -315,7 +390,9 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
             <div class="input-box3-edit md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
               <div class="original-info3-edit flex items-center justify-center flex-col">
                 <div class="icon pt-4">
-                  <label for="productImage3-edit" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
+                  <label for="productImage2" class="text-4xl text-[#042EFF]">
+                        <CloudArrowUpIcon class="size-8"/>
+                  </label>
                 </div>
                 <div class="initial-info">
                   <label for="productImage3-edit" class="block py-2">Browse image:</label>
@@ -326,7 +403,9 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
             <div class="input-box4-edit md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
               <div class="original-info4-edit flex items-center justify-center flex-col">
                 <div class="icon pt-4">
-                  <label for="productImage4-edit" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
+                  <label for="productImage2" class="text-4xl text-[#042EFF]">
+                        <CloudArrowUpIcon class="size-8"/>
+                  </label>
                 </div>
                 <div class="initial-info">
                   <label for="productImage4-edit" class="block py-2">Browse image:</label>
@@ -354,5 +433,25 @@ import AdminHeader from '@/Components/app/AdminHeader.vue'
           <button type="submit" class="capitalize px-4 py-2 bg-[#042EFF] rounded-md text-white my-4">edit product</button>
         </form>
       </div>
+              </div>
+
+              <div class="mt-4">
+                <button
+                  type="button"
+                  class="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                  @click="closeModal"
+                >
+                  Got it, thanks!
+                </button>
+              </div>
+            </DialogPanel>
+          </TransitionChild>
+        </div>
+      </div>
+    </Dialog>
+  </TransitionRoot>
+    <div class="edit-product bg-white p-4 rounded-md my-4 absolute z-10 top-10 left-24 sm:left-32 lg:left-40 w-3/4 md:w-4/5">
+      <div class="close flex justify-end px-3"><i class="fa-solid fa-times text-2xl p-2 cursor-pointer"></i></div>
+      <h2 class="text-[rgb(4,46,255)] text-base md:text-xl font-semibold py-4 capitalize">Edit this product</h2>
     </div>
 </template>

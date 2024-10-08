@@ -18,7 +18,11 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^43.2.0",
+        "@ckeditor/ckeditor5-vue": "^7.2.0",
         "@fortawesome/vue-fontawesome": "^3.0.8",
-        "@heroicons/vue": "^2.1.5"
+        "@headlessui/vue": "^1.7.23",
+        "@heroicons/vue": "^2.1.5",
+        "ckeditor5": "^43.2.0"
     }
 }
