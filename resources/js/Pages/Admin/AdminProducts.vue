@@ -2,8 +2,9 @@
 import AdminSidebar from '@/Components/app/AdminSidebar.vue'
 import AdminHeader from '@/Components/app/AdminHeader.vue'
 import { ref } from 'vue'
-import { PencilSquareIcon, TrashIcon, CloudArrowUpIcon } from '@heroicons/vue/24/solid'
+import { PencilSquareIcon, TrashIcon, CloudArrowUpIcon, XMarkIcon } from '@heroicons/vue/24/solid'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {isImage} from '@/helpers.js'
 
 
 import {
@@ -23,11 +24,39 @@ function openModal() {
   console.log('This button is already clicked')
   isOpen.value = true
 }
+const attachmentFiles = ref([])
 
 const editor = ClassicEditor
 
 const editorConfig = {
     toolbar: ['heading', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote']
+}
+
+async function onImageChoose(event){
+    for(const file of event.target.files){
+
+        const myFile = {
+            file,
+            src: await readFile(file)
+        }
+        attachmentFiles.value.push(myFile)
+    }
+    console.log(attachmentFiles.value)
+}
+
+ async function readFile(file){
+    return new Promise((res,rej) => {
+        if(isImage({mime: file.type})){
+            const reader = new FileReader()
+            reader.onload = () => {
+                res(reader.result)
+            }
+            reader.onerror = rej
+            reader.readAsDataURL(file)
+        } else {
+            res(null)
+        }
+    })
 }
 
 </script>
@@ -218,59 +247,52 @@ const editorConfig = {
                   <input type="number" name="initialPrice" id="initialPrice" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
                 </div>
               </div>
-              <div class="form-row w-full flex flex-col md:flex-row gap-2 justify-between my-4">
-                <div class="input-box1 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
-                  <div class="original-info1 flex items-center justify-center flex-col">
-                    <div class="icon pt-4">
-                      <label for="productImage1" class="text-4xl text-[#042EFF]">
-                        <CloudArrowUpIcon class="size-8"/>
-                      </label>
+              <div class="my-4">
+                <div class="border-dashed border-2 border-[#042EFF]">
+                  <div class="grid grid-cols-4 gap-[38px]">
+                    <div class="border-2 border-[#042EFF] h-40 w-56 relative">
+                        <div  class="h-full w-full">
+                            <img src="/images/man4.jpeg" alt="" class="h-full w-full object-cover">
+                        </div>
+                        <div class="absolute -right-2 -top-3 w-8 h-8 flex items-center justify-center cursor-pointer rounded-full border-2 border-[#042EFF] bg-gray-100">
+                          <XMarkIcon class="size-6"/>
+                        </div>
                     </div>
-                    <div class="initial-info">
-                      <label for="productImage1" class="block py-2">Browse image:</label>
+                    <div class="border-2 border-[#042EFF] h-40 w-56 relative">
+                        <div  class="h-full w-full">
+                            <img src="/images/man4.jpeg" alt="" class="h-full w-full object-cover">
+                        </div>
+                        <div class="absolute -right-2 -top-3 w-8 h-8 flex items-center justify-center cursor-pointer rounded-full border-2 border-[#042EFF] bg-gray-100">
+                          <XMarkIcon class="size-6"/>
+                        </div>
                     </div>
-                  </div>
+                    <div class="border-2 border-[#042EFF] h-40 w-56 relative">
+                        <div  class="h-full w-full">
+                            <img src="/images/man4.jpeg" alt="" class="h-full w-full object-cover">
+                        </div>
+                        <div class="absolute -right-2 -top-3 w-8 h-8 flex items-center justify-center cursor-pointer rounded-full border-2 border-[#042EFF] bg-gray-100">
+                          <XMarkIcon class="size-6"/>
+                        </div>
+                    </div>
+                    <div class="border-2 border-[#042EFF] h-40 w-56 relative">
+                        <div  class="h-full w-full">
+                            <img src="/images/man4.jpeg" alt="" class="h-full w-full object-cover">
+                        </div>
+                        <div class="absolute -right-2 -top-3 w-8 h-8 flex items-center justify-center cursor-pointer rounded-full border-2 border-[#042EFF] bg-gray-100">
+                          <XMarkIcon class="size-6"/>
+                        </div>
+                    </div>
                 </div>
-                  <input type="file" name="productImage1" id="productImage1" class="file1" hidden>
-                <div class="input-box2 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
-                  <div class="original-info2 flex items-center justify-center flex-col">
-                    <div class="icon pt-4">
-                      <label for="productImage2" class="text-4xl text-[#042EFF]">
-                        <CloudArrowUpIcon class="size-8"/>
-                      </label>
-                    </div>
-                    <div class="initial-info">
-                      <label for="productImage2" class="block py-2">Browse image:</label>
-                    </div>
-                  </div>
+                    <!-- <div class="pt-4 relative flex items-center flex-col">
+                        <span class="text-4xl text-[#042EFF]">
+                            <input type="file" multiple @change="onImageChoose" @click.stop class="absolute opacity-0 left-0 top-0 right-0 bottom-0">
+                            <CloudArrowUpIcon class="size-8"/>
+                        </span>
+                        <div class="initial-info">
+                          <span  class="block py-2 text-center">Browse image(You must attach 4 images of the product):</span>
+                        </div>
+                    </div> -->
                 </div>
-                  <input type="file" name="productImage2" id="productImage2" class="file2" hidden>
-                <div class="input-box3 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
-                  <div class="original-info3 flex items-center justify-center flex-col">
-                    <div class="icon pt-4">
-                      <label for="productImage3" class="text-4xl text-[#042EFF]">
-                        <CloudArrowUpIcon class="size-8"/>
-                      </label>
-                    </div>
-                    <div class="initial-info">
-                      <label for="productImage3" class="block py-2">Browse image:</label>
-                    </div>
-                  </div>
-                </div>
-                  <input type="file" name="productImage3" id="productImage3" class="file3" hidden>
-                <div class="input-box4 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
-                  <div class="original-info4 flex items-center justify-center flex-col">
-                    <div class="icon pt-4">
-                      <label for="productImage4" class="text-4xl text-[#042EFF]">
-                        <CloudArrowUpIcon class="size-8"/>
-                      </label>
-                    </div>
-                    <div class="initial-info">
-                      <label for="productImage4" class="block py-2">Browse image:</label>
-                    </div>
-                  </div>
-                </div>
-                  <input type="file" name="productImage4" id="productImage4" class="file4" hidden>
               </div>
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
