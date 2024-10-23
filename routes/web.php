@@ -6,6 +6,8 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\Auth\RegisteredUserController;
+use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 
 Route::get('/', [CustomerController::class, 'index'])->name('customer.home');
 Route::get('/about', [CustomerController::class, 'about'])->name('customer.about');
@@ -22,6 +24,9 @@ Route::prefix('admin')->group(function(){
     Route::get('/stock', [AdminController::class, 'adminStock'])->name('admin.stock');
     Route::get('/clientinfo', [AdminController::class, 'adminClientinfo'])->name('admin.clientinfo');
     Route::get('/settings', [AdminController::class, 'adminSettings'])->name('admin.settings');
+    Route::get('/adminsignup', [RegisteredUserController::class, 'adminCreate'])->name('admin.register');
+    Route::get('/adminlogin', [AuthenticatedSessionController::class, 'adminLogin'])->name('admin.login');
+    Route::post('/adminStore', [RegisteredUserController::class, 'store'])->name('admin.store');
 });
 
 Route::get('/dashboard', function () {

@@ -15,16 +15,16 @@ import {
   DialogTitle,
 } from '@headlessui/vue'
 
-const isOpen = ref(true)
+const isOpen = ref(false)
 
 function closeModal() {
   isOpen.value = false
 }
 function openModal() {
-  console.log('This button is already clicked')
   isOpen.value = true
 }
 const attachmentFiles = ref([])
+const attachmentErrors = ref([])
 
 const editor = ClassicEditor
 
@@ -33,6 +33,7 @@ const editorConfig = {
 }
 
 async function onImageChoose(event){
+    attachmentFiles.value = []
     for(const file of event.target.files){
 
         const myFile = {
@@ -40,8 +41,22 @@ async function onImageChoose(event){
             src: await readFile(file)
         }
         attachmentFiles.value.push(myFile)
+        if(attachmentFiles.value.length > 4){
+            attachmentErrors.value.push('You must select exactly 4 images')
+            attachmentFiles.value = []
+            return
+        } else{
+            attachmentErrors.value = []
+        }
     }
-    console.log(attachmentFiles.value)
+    if(attachmentFiles.value.length < 4){
+        attachmentErrors.value.push('You must select exactly 4 images')
+        attachmentFiles.value = []
+        return
+    } else {
+        attachmentErrors.value = []
+    }
+    event.target.files
 }
 
  async function readFile(file){
@@ -248,42 +263,24 @@ async function onImageChoose(event){
                 </div>
               </div>
               <div class="my-4">
-                <div class="border-dashed border-2 border-[#042EFF]">
-                  <div class="grid grid-cols-4 gap-[38px]">
-                    <div class="border-2 border-[#042EFF] h-40 w-56 relative">
+                <div class="border-dashed border-2 border-[#042EFF]"
+                :class="[
+                    attachmentFiles && attachmentFiles.length === 4 ? 'border-0' : 'border-dashed',
+                    attachmentErrors.length ? 'border-red-600' : 'border-[#042EFF]'
+                ]"
+                >
+                  <div v-if="attachmentFiles && attachmentFiles.length === 4" class="grid grid-cols-4 gap-[38px] relative p-4">
+                    <button class="absolute cursor-pointer right-0 -top-3 capitalize text-xs px-4 py-2 bg-[#042EFF] rounded-md text-white">
+                        <input type="file" multiple @change="onImageChoose" @click.stop class="absolute  opacity-0 left-0 top-0 right-0 bottom-0">
+                        Replace images
+                    </button>
+                    <div v-for="(myfile, index) in attachmentFiles" :key="index" class="border-2 border-[#042EFF] h-40 w-56">
                         <div  class="h-full w-full">
-                            <img src="/images/man4.jpeg" alt="" class="h-full w-full object-cover">
-                        </div>
-                        <div class="absolute -right-2 -top-3 w-8 h-8 flex items-center justify-center cursor-pointer rounded-full border-2 border-[#042EFF] bg-gray-100">
-                          <XMarkIcon class="size-6"/>
-                        </div>
-                    </div>
-                    <div class="border-2 border-[#042EFF] h-40 w-56 relative">
-                        <div  class="h-full w-full">
-                            <img src="/images/man4.jpeg" alt="" class="h-full w-full object-cover">
-                        </div>
-                        <div class="absolute -right-2 -top-3 w-8 h-8 flex items-center justify-center cursor-pointer rounded-full border-2 border-[#042EFF] bg-gray-100">
-                          <XMarkIcon class="size-6"/>
-                        </div>
-                    </div>
-                    <div class="border-2 border-[#042EFF] h-40 w-56 relative">
-                        <div  class="h-full w-full">
-                            <img src="/images/man4.jpeg" alt="" class="h-full w-full object-cover">
-                        </div>
-                        <div class="absolute -right-2 -top-3 w-8 h-8 flex items-center justify-center cursor-pointer rounded-full border-2 border-[#042EFF] bg-gray-100">
-                          <XMarkIcon class="size-6"/>
-                        </div>
-                    </div>
-                    <div class="border-2 border-[#042EFF] h-40 w-56 relative">
-                        <div  class="h-full w-full">
-                            <img src="/images/man4.jpeg" alt="" class="h-full w-full object-cover">
-                        </div>
-                        <div class="absolute -right-2 -top-3 w-8 h-8 flex items-center justify-center cursor-pointer rounded-full border-2 border-[#042EFF] bg-gray-100">
-                          <XMarkIcon class="size-6"/>
+                            <img :src="myfile.src" alt="" class="h-full w-full object-cover">
                         </div>
                     </div>
                 </div>
-                    <!-- <div class="pt-4 relative flex items-center flex-col">
+                    <div v-if="attachmentFiles.length === 0 || attachmentFiles.length > 4" class="pt-4 relative flex items-center flex-col">
                         <span class="text-4xl text-[#042EFF]">
                             <input type="file" multiple @change="onImageChoose" @click.stop class="absolute opacity-0 left-0 top-0 right-0 bottom-0">
                             <CloudArrowUpIcon class="size-8"/>
@@ -291,8 +288,9 @@ async function onImageChoose(event){
                         <div class="initial-info">
                           <span  class="block py-2 text-center">Browse image(You must attach 4 images of the product):</span>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
+                <div v-if="attachmentErrors" class="mt-1 text-sm text-red-500">{{ attachmentErrors[0] }}</div>
               </div>
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
