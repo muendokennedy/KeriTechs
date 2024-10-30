@@ -27,6 +27,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/adminsignup', [RegisteredUserController::class, 'adminCreate'])->name('admin.register');
     Route::get('/adminlogin', [AuthenticatedSessionController::class, 'adminLogin'])->name('admin.login');
     Route::post('/adminStore', [RegisteredUserController::class, 'store'])->name('admin.store');
+    Route::post('/adminAuthenticate', [AuthenticatedSessionController::class, 'adminLoginStore'])->name('admin.authenticate');
 });
 
 Route::get('/dashboard', function () {
@@ -39,4 +40,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Route::post('/product/store', )
 require __DIR__.'/auth.php';
