@@ -6,6 +6,7 @@ use Illuminate\Foundation\Application;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 
@@ -28,6 +29,9 @@ Route::prefix('admin')->group(function(){
     Route::get('/adminlogin', [AuthenticatedSessionController::class, 'adminLogin'])->name('admin.login');
     Route::post('/adminStore', [RegisteredUserController::class, 'store'])->name('admin.store');
     Route::post('/adminAuthenticate', [AuthenticatedSessionController::class, 'adminLoginStore'])->name('admin.authenticate');
+
+
+    Route::post('/product/store', [AdminProductController::class, 'storeProduct'])->name('admin.product.store');
 });
 
 Route::get('/dashboard', function () {
@@ -40,5 +44,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::post('/product/store', )
 require __DIR__.'/auth.php';

@@ -5,6 +5,7 @@ import { ref } from 'vue'
 import { PencilSquareIcon, TrashIcon, CloudArrowUpIcon, XMarkIcon } from '@heroicons/vue/24/solid'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {isImage} from '@/helpers.js'
+import { useForm} from '@inertiajs/vue3'
 
 
 import {
@@ -16,6 +17,20 @@ import {
 } from '@headlessui/vue'
 
 const isOpen = ref(false)
+
+const form = useForm({
+    productCategory: '',
+    productName: '',
+    productSpecifications: '',
+    productInitialPrice: '',
+    productDiscountPrice: '',
+    brandName: '',
+    productAverageRating: '',
+    productWarranty: '',
+    productDescription: '',
+    attachments: [],
+    _method: 'POST'
+})
 
 function closeModal() {
   isOpen.value = false
@@ -30,6 +45,18 @@ const editor = ClassicEditor
 
 const editorConfig = {
     toolbar: ['heading', '|', 'bold', 'italic', '|', 'link', '|', 'bulletedList', 'numberedList', '|', 'outdent', 'indent', '|', 'blockQuote']
+}
+
+const submit = () => {
+
+form.attachments = attachmentFiles.value.map(myFile => myFile.file)
+
+form.post(route('admin.product.store'), {
+  onError: (errors) => {
+    console.log(errors)
+  }
+})
+
 }
 
 async function onImageChoose(event){
@@ -235,11 +262,11 @@ async function onImageChoose(event){
         <div class="new-product bg-white p-4 rounded-md my-4">
           <h2 class="text-[rgb(4,46,255)] font-semibold text-base md:text-xl py-4 capitalize">add new product</h2>
           <div class="new-product-form">
-            <form action="#">
+            <form @submit.prevent="submit">
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
                   <label for="category" class="block py-3">Select Category:</label>
-                  <select name="category" id="category" class="border-2 outline-none rounded-md px-4 py-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                  <select v-model="form.productCategory" id="category" class="border-2 outline-none rounded-md px-4 py-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
                     <option value="None">None</option>
                     <option value="Phone">Phone</option>
                     <option value="Laptop">Laptop</option>
@@ -249,17 +276,18 @@ async function onImageChoose(event){
                 </div>
                 <div class="input-box md:basis-[48%]">
                   <label for="productName" class="block py-3">Enter Product name:</label>
-                  <input type="text" name="productName" id="productName" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                  <input type="text" v-model="form.productName" id="productName" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                  <p class="text-red-500 text-sm">The product name is required</p>
                 </div>
               </div>
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
                   <label for="specs" class="block py-3">Enter product specifications (CSV):</label>
-                  <input type="text" name="specs" id="specs" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                  <input type="text" v-model="form.productSpecifications" id="specs" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
                 </div>
                 <div class="input-box md:basis-[48%]">
                   <label for="initialPrice" class="block py-3">Enter the initial price:</label>
-                  <input type="number" name="initialPrice" id="initialPrice" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                  <input type="number" v-model="form.productInitialPrice" id="initialPrice" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
                 </div>
               </div>
               <div class="my-4">
@@ -295,17 +323,27 @@ async function onImageChoose(event){
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
                   <label for="discountPrice" class="block py-3">Enter the discounted price:</label>
-                  <input type="number" name="discountPrice" id="discountPrice" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                  <input type="number" v-model="form.productDiscountPrice" id="discountPrice" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
                 </div>
                 <div class="input-box md:basis-[48%]">
                   <label for="brandName" class="block py-3">Enter the brand name:</label>
-                  <input type="text" name="brandName" id="brandName" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                  <input type="text" v-model="form.brandName" id="brandName" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                </div>
+              </div>
+              <div class="form-row w-full flex flex-col md:flex-row justify-between">
+                <div class="input-box md:basis-[48%]">
+                  <label for="discountPrice" class="block py-3">Enter product average rating:</label>
+                  <input type="number" v-model="form.productAverageRating" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                </div>
+                <div class="input-box md:basis-[48%]">
+                  <label for="brandName" class="block py-3">Enter the product warranty:</label>
+                  <input type="text" v-model="form.productWarranty" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
                 </div>
               </div>
               <div class="form-row">
                 <div class="input-box">
-                  <label for="product-description" class="block py-3">Type the product description:</label>
-                  <ckeditor :editor="editor" :config="editorConfig"></ckeditor>
+                  <label for="product-description" class="block py-3">Type the product description(End the first sentence with pipe(|) then period(.)):</label>
+                  <ckeditor :editor="editor" v-model="form.productDescription" :config="editorConfig"></ckeditor>
                   <!--<textarea name="productDescription" id="product-description" cols="30" rows="10" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus></textarea>---->
                 </div>
               </div>
