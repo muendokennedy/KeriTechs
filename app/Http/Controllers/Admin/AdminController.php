@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\ProductResource;
 
 class AdminController extends Controller
 {
@@ -19,7 +21,11 @@ class AdminController extends Controller
     }
     public function adminProducts()
     {
-       return Inertia::render('Admin/AdminProducts');
+      $products = Product::all();
+
+       return Inertia::render('Admin/AdminProducts', [
+         'products' => ProductResource::collection($products)
+       ]);
     }
     public function adminOrders()
     {

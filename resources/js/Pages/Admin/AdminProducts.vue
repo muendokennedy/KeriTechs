@@ -8,7 +8,7 @@ import {isImage} from '@/helpers.js'
 import { useForm} from '@inertiajs/vue3'
 
 const props = defineProps({
-  product: {
+  products: {
     type: Array,
     required: true
   }
@@ -48,7 +48,6 @@ function openModal() {
   isOpen.value = true
 }
 const attachmentFiles = ref([])
-const attachmentErrors = ref([])
 
 const editor = ClassicEditor
 
@@ -80,35 +79,29 @@ async function onImageChoose(event){
         }
         attachmentFiles.value.push(myFile)
         if(attachmentFiles.value.length > 4){
-            attachmentErrors.value.push('You must select exactly 4 images')
               setTimeout(() => {
               flashMessage.value = ''
               }, 4000)
               flashMessage.value = 'You must select exactly 4 images'
             attachmentFiles.value = []
-            event.target.files = null
+            event.target.value = null
             return
         } else{
-            attachmentErrors.value = []
             flashMessage.value = ''
-            event.target.files = null
         }
     }
     if(attachmentFiles.value.length < 4){
-        attachmentErrors.value.push('You must select exactly 4 images')
         setTimeout(() => {
         flashMessage.value = ''
         }, 4000)
         flashMessage.value = 'You must select exactly 4 images'
         attachmentFiles.value = []
-        event.target.files = null
+        event.target.value = null
         return
     } else {
-        attachmentErrors.value = []
         flashMessage.value = ''
-        event.target.files = null
     }
-    event.target.files = null
+    event.target.value = null
   }
 
 
@@ -149,61 +142,13 @@ async function onImageChoose(event){
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Laptop</td>
-                  <td class="border-2 py-2 px-2 text-center">Dell latitude 5320</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/dell latitude 5320.png" alt="A dell laptop" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$1500</td>
-                  <td class="border-2 py-2 px-2 text-center">$1000</td>
-                  <td class="border-2 py-2 px-2 text-center">Dell</td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Laptop</td>
-                  <td class="border-2 py-2 px-2 text-center">HP laptop 15 ci7</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/hp laptop 15 ci7.png" alt="An HP  laptop" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$800</td>
-                  <td class="border-2 py-2 px-2 text-center">$600</td>
-                  <td class="border-2 py-2 px-2 text-center">HP</td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Phone</td>
-                  <td class="border-2 py-2 px-2 text-center">Iphone 14</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/iphone14.png" alt="An iphone14" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$1100</td>
-                  <td class="border-2 py-2 px-2 text-center">$1102</td>
-                  <td class="border-2 py-2 px-2 text-center">Apple</td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Phone</td>
-                  <td class="border-2 py-2 px-2 text-center">Iphone 12</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/iphone12.png" alt="An Iphone12" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$1000</td>
-                  <td class="border-2 py-2 px-2 text-center">$900</td>
-                  <td class="border-2 py-2 px-2 text-center">Apple</td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Laptop</td>
-                  <td class="border-2 py-2 px-2 text-center">HP laptop 15 ci7</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/hp laptop 15 ci7.png" alt="An HP  laptop" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$800</td>
-                  <td class="border-2 py-2 px-2 text-center">$600</td>
-                  <td class="border-2 py-2 px-2 text-center">HP</td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Phone</td>
-                  <td class="border-2 py-2 px-2 text-center">Iphone 14</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/iphone14.png" alt="An iphone14" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$1100</td>
-                  <td class="border-2 py-2 px-2 text-center">$1102</td>
-                  <td class="border-2 py-2 px-2 text-center">Apple</td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Phone</td>
-                  <td class="border-2 py-2 px-2 text-center">Iphone 12</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/iphone12.png" alt="An Iphone12" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$1000</td>
-                  <td class="border-2 py-2 px-2 text-center">$900</td>
-                  <td class="border-2 py-2 px-2 text-center">Apple</td>
+                <tr v-for="(product, index) in products" :key="index">
+                  <td class="border-2 py-2 px-2 text-center">{{ product.productCategory }}</td>
+                  <td class="border-2 py-2 px-2 text-center">{{ product.productName }}</td>
+                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img :src="product.productFirstImage" :alt="product.productName" class="h-14 w-auto"></td>
+                  <td class="border-2 py-2 px-2 text-center">${{ product.productInitialPrice }}</td>
+                  <td class="border-2 py-2 px-2 text-center">${{ product.productDiscountPrice }}</td>
+                  <td class="border-2 py-2 px-2 text-center">{{ product.brandName }}</td>
                 </tr>
               </tbody>
             </table>
@@ -217,78 +162,23 @@ async function onImageChoose(event){
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
+                <tr v-for="(product, index) in products" :key="index">
+                  <td class="border-2 py-2 px-2" v-html="product.productDescription"></td>
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
+                      <button @click="openModal" type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
                       <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                        <button type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
-                        <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                        <button type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
-                        <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                        <button type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
-                        <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                        <button type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
-                        <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                        <button type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
-                        <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                        <button type="button" @click="openModal" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
-                        <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
                     </div>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-
         </div>
         <div class="new-product bg-white p-4 rounded-md my-4">
           <h2 class="text-[rgb(4,46,255)] font-semibold text-base md:text-xl py-4 capitalize">add new product</h2>
           <div class="new-product-form">
-            <div class="flash-message transition-all duration-300 flex justify-between text-white bg-red-500 border-red-700 border rounded-md fixed top-20 right-12 w-[600px] p-4 z-10"
+            <div class="flash-message transition-all duration-300 flex justify-between text-white bg-red-500 border-red-700 border rounded-md fixed top-20 w-[600px] p-4 z-10"
             :class="[
               !flashMessage ? '-right-[100%]' : 'right-20'
             ]">{{flashMessage}}
@@ -340,8 +230,7 @@ async function onImageChoose(event){
               <div class="my-4">
                 <div class="border-dashed border-2 border-[#042EFF]"
                 :class="[
-                    attachmentFiles && attachmentFiles.length === 4 ? 'border-0' : 'border-dashed',
-                    attachmentErrors.length ? 'border-red-600' : 'border-[#042EFF]'
+                    attachmentFiles && attachmentFiles.length === 4 ? 'border-0' : 'border-dashed'
                 ]"
                 >
                   <div v-if="attachmentFiles && attachmentFiles.length === 4" class="grid grid-cols-4 gap-[38px] relative p-4">
@@ -365,7 +254,6 @@ async function onImageChoose(event){
                         </div>
                     </div>
                 </div>
-                <!-- <div v-if="attachmentErrors" class="mt-1 text-sm text-red-500">{{ attachmentErrors[0] }}</div> -->
                 <p v-if="formErrors[0]?.attachments" class="text-red-500">{{ formErrors[0]?.attachments }}</p>
               </div>
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
