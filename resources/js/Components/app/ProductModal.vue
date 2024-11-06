@@ -148,7 +148,10 @@ async function onImageChoose(event){
 }
 </script>
 <template>
-        <div class="product bg-white p-2 rounded-md my-4">
+        <div class="product bg-white p-2 rounded-md my-4"
+        :class="[
+            product.id ? 'p-2' : 'p-4'
+        ]">
             <div v-if="product.id">
                 <XMarkIcon @click="$emit('hide')" class="size-6 cursor-pointer justify-self-end"/>
             </div>

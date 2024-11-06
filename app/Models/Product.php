@@ -26,4 +26,23 @@ class Product extends Model
         'productThirdImage',
         'productFourthImage'
     ];
+
+    protected static function boot()
+    {
+       parent::boot();
+
+       static::updating(function(self $model){
+            Storage::disk('public')->delete($model->productFirstImage);
+            Storage::disk('public')->delete($model->productSecondImage);
+            Storage::disk('public')->delete($model->productThirdImage);
+            Storage::disk('public')->delete($model->productFourthImage);
+       });
+
+       static::deleting(function(self $model){
+            Storage::disk('public')->delete($model->productFirstImage);
+            Storage::disk('public')->delete($model->productSecondImage);
+            Storage::disk('public')->delete($model->productThirdImage);
+            Storage::disk('public')->delete($model->productFourthImage);
+       });
+    }
 }
