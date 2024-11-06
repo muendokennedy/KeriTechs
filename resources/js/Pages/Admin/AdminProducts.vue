@@ -33,7 +33,6 @@ function closeModal() {
 function openModal(product) {
   isOpen.value = true
   editProduct.value = product
-  console.log(editProduct.value)
 }
 
 
@@ -142,7 +141,7 @@ const onModalhide = () => {
             >
               <div>
 
-                <ProductModal :product="editProduct"/>
+                <ProductModal :product="editProduct" @hide="closeModal"/>
 
               </div>
             </DialogPanel>
@@ -151,8 +150,4 @@ const onModalhide = () => {
       </div>
     </Dialog>
   </TransitionRoot>
-    <div class="edit-product bg-white p-4 rounded-md my-4 absolute z-10 top-10 left-24 sm:left-32 lg:left-40 w-3/4 md:w-4/5">
-      <div class="close flex justify-end px-3"><i class="fa-solid fa-times text-2xl p-2 cursor-pointer"></i></div>
-      <h2 class="text-[rgb(4,46,255)] text-base md:text-xl font-semibold py-4 capitalize">Edit this product</h2>
-    </div>
 </template>

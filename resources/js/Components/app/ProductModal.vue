@@ -46,6 +46,18 @@ const computedAttachments = computed(() => {
     return [...attachmentFiles.value, ...(props.product.attachments || [])]
 })
 
+const filteredAttachments = computed(() => {
+    return computedAttachments.value.filter(
+        attachment => typeof attachment === 'object' && attachment !== null && 'file' in attachment
+    )
+})
+
+const displayAttachments = computed(() => {
+    return filteredAttachments.value.length > 0 ? filteredAttachments.value : computedAttachments.value
+})
+
+
+
 
 const editor = ClassicEditor
 
@@ -76,6 +88,12 @@ const submit = () => {
         })
     }
 }
+
+console.log(filteredAttachments.value)
+console.log(computedAttachments.value)
+console.log(attachmentFiles.value)
+
+
 
 async function onImageChoose(event){
     attachmentFiles.value = []
@@ -109,7 +127,6 @@ async function onImageChoose(event){
     } else {
         flashMessage.value = ''
     }
-    console.log(attachmentFiles.value)
     console.log(computedAttachments.value)
     event.target.value = null
   }
@@ -132,7 +149,10 @@ async function onImageChoose(event){
 </script>
 <template>
         <div class="product bg-white p-2 rounded-md my-4">
-          <h2 class="text-[rgb(4,46,255)] font-semibold text-base md:text-xl py-2 capitalize">add new product</h2>
+            <div v-if="product.id">
+                <XMarkIcon @click="$emit('hide')" class="size-6 cursor-pointer justify-self-end"/>
+            </div>
+          <h2 class="text-[rgb(4,46,255)] font-semibold text-base md:text-xl py-2 capitalize">{{ product.id ? 'Update product' : 'Add new product' }}</h2>
           <div class="new-product-form">
             <div class="flash-message transition-all duration-300 flex justify-between text-white bg-red-500 border-red-700 border rounded-md fixed top-20 w-[600px] p-4 z-10"
             :class="[
@@ -156,7 +176,6 @@ async function onImageChoose(event){
                   </select>
                   <p v-if="formErrors[0]?.productCategory" class="text-red-500">{{ formErrors[0]?.productCategory }}</p>
                 </div>
-                {{  }}
                 <div class="input-box md:basis-[48%]">
                   <label for="productName" class="block py-3">Enter Product name:</label>
                   <input type="text" v-model="form.productName" id="productName" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus
@@ -187,21 +206,21 @@ async function onImageChoose(event){
               <div class="my-4">
                 <div class="border-dashed border-2 border-[#042EFF]"
                 :class="[
-                    computedAttachments && computedAttachments.length === 4 ? 'border-0' : 'border-dashed'
+                    computedAttachments && (computedAttachments.length === 4 || filteredAttachments.length === 4) ? 'border-0' : 'border-dashed'
                 ]"
                 >
-                  <div v-if="computedAttachments && computedAttachments.length === 4" class="grid grid-cols-4 gap-[38px] relative p-4">
+                  <div v-if="computedAttachments && (computedAttachments.length === 4 || filteredAttachments.length === 4)" class="grid grid-cols-4 gap-[38px] relative p-4">
                     <button class="absolute cursor-pointer right-0 -top-3 capitalize text-xs px-4 py-2 bg-[#042EFF] rounded-md text-white">
                         <input type="file" multiple @change="onImageChoose" @click.stop class="absolute  opacity-0 left-0 top-0 right-0 bottom-0">
                         Replace images
                     </button>
-                    <div v-for="(myfile, index) in computedAttachments" :key="index" class="border-2 border-[#042EFF] h-40 w-56">
+                    <div v-for="(myfile, index) in displayAttachments" :key="index" class="border-2 border-[#042EFF] h-40 w-56">
                         <div  class="h-full w-full">
-                            <img :src="myfile.src ?? myfile" alt="" class="h-full w-full object-cover">
+                            <img v-if="myfile" :src="myfile.src ?? myfile" alt="" class="h-full w-full object-cover">
                         </div>
                     </div>
                 </div>
-                    <div v-if="computedAttachments.length === 0 || computedAttachments.length > 4" class="pt-4 relative flex items-center flex-col">
+                    <div v-if="computedAttachments.length === 0" class="pt-4 relative flex items-center flex-col">
                         <span class="text-4xl text-[#042EFF]">
                             <input type="file" multiple @change="onImageChoose" @click.stop class="absolute opacity-0 left-0 top-0 right-0 bottom-0">
                             <CloudArrowUpIcon class="size-8"/>
