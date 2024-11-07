@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\StoreProductRequest;
+use App\Http\Requests\Admin\UpdateProductRequest;
 
 class AdminProductController extends Controller
 {
@@ -67,7 +68,7 @@ class AdminProductController extends Controller
         return back();
     }
 
-    public function updateProduct()
+    public function updateProduct(UpdateProductRequest $request, Product $product)
     {
         $data = $request->validated();
 
@@ -76,9 +77,6 @@ class AdminProductController extends Controller
         $allFilePaths = [];
 
         try {
-
-            $product = new Product;
-
             $product->productCategory = $data['productCategory'];
             $product->productName = $data['productName'];
             $product->productSpecifications = $data['productSpecifications'];
@@ -91,18 +89,21 @@ class AdminProductController extends Controller
 
             $files = $data['attachments'] ?? '';
 
-            foreach($files as $file){
+            if(!empty($files)){
+                foreach($files as $file){
 
-                $path = $file->store('products/'. $data['productCategory'] . 's/' . count($allFilePaths) + 1, 'public');
+                    $path = $file->store('products/'. $data['productCategory'] . 's/' . count($allFilePaths) + 1, 'public');
 
-                $allFilePaths[] = $path;
+                    $allFilePaths[] = $path;
 
+                }
             }
 
-            $product->productFirstImage = $allFilePaths[0];
-            $product->productSecondImage = $allFilePaths[1];
-            $product->productThirdImage = $allFilePaths[2];
-            $product->productFourthImage = $allFilePaths[3];
+            $imageAttributes = ['productFirstImage', 'productSecondImage', 'productThirdImage', 'productFourthImage'];
+
+            foreach($imageAttributes as $index => $attribute){
+                $product->$attribute = !empty($allFilePaths[$index]) ? $allFilePaths[$index] : $product->$attribute;
+            }
 
             $product->save();
 

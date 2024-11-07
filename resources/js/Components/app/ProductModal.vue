@@ -56,7 +56,7 @@ const displayAttachments = computed(() => {
     return filteredAttachments.value.length > 0 ? filteredAttachments.value : computedAttachments.value
 })
 
-
+const emit = defineEmits('hide')
 
 
 const editor = ClassicEditor
@@ -71,10 +71,12 @@ const submit = () => {
 
     if(props.product.id){
         form._method = 'PUT'
-        form.post(route('admin.product.update'), {
+        form.post(route('admin.product.update', props.product), {
         onError: (errors) => {
             formErrors.value.push(errors)
-            console.log(formErrors.value[0].productName)
+        },
+        onSuccess: () => {
+            emit('hide')
         },
         preserveScroll: true
         })
@@ -82,18 +84,11 @@ const submit = () => {
         form.post(route('admin.product.store'), {
         onError: (errors) => {
             formErrors.value.push(errors)
-            console.log(formErrors.value[0].productName)
         },
         preserveScroll: true
         })
     }
 }
-
-console.log(filteredAttachments.value)
-console.log(computedAttachments.value)
-console.log(attachmentFiles.value)
-
-
 
 async function onImageChoose(event){
     attachmentFiles.value = []

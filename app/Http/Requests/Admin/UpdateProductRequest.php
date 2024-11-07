@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use Illuminate\Validation\Rules\File;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProductRequest extends FormRequest
@@ -27,7 +28,6 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             //
-
             'productCategory' => 'required | string',
             'productName' => 'required | string',
             'productSpecifications' => 'required | string',
@@ -41,7 +41,6 @@ class UpdateProductRequest extends FormRequest
                 'array',
                 'max:4',
                 'sometimes',
-                'required',
                 function($attribute, $value, $fail){
                     // Custom rule to check the total size of all files
                     $totalSize = collect($value)->sum(function($file){

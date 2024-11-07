@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -31,18 +33,22 @@ class Product extends Model
     {
        parent::boot();
 
-       static::updating(function(self $model){
-            Storage::disk('public')->delete($model->productFirstImage);
-            Storage::disk('public')->delete($model->productSecondImage);
-            Storage::disk('public')->delete($model->productThirdImage);
-            Storage::disk('public')->delete($model->productFourthImage);
+       $images = ['productFirstImage', 'productSecondImage', 'productThirdImage', 'productFourthImage'];
+
+       static::updating(function(self $model) use ($images){
+
+           foreach($images as $image){
+                Storage::disk('public')->delete($model->getOriginal($image));
+           }
+
        });
 
-       static::deleting(function(self $model){
-            Storage::disk('public')->delete($model->productFirstImage);
-            Storage::disk('public')->delete($model->productSecondImage);
-            Storage::disk('public')->delete($model->productThirdImage);
-            Storage::disk('public')->delete($model->productFourthImage);
+       static::deleted(function(self $model) use ($images){
+
+            foreach($images as $image){
+                Storage::disk('public')->delete($model->$image);
+            }
+
        });
     }
 }
