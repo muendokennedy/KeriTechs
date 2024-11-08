@@ -14,6 +14,8 @@ const props = defineProps({
   }
 })
 
+const form = useForm({})
+
 
 import {
   TransitionRoot,
@@ -33,6 +35,12 @@ function closeModal() {
 function openModal(product) {
   isOpen.value = true
   editProduct.value = product
+}
+
+const deleteProduct = (product) => {
+    form.delete(route('admin.product.delete', product), {
+        preserveScroll: true
+    })
 }
 
 
@@ -60,51 +68,54 @@ const onModalhide = () => {
       <main class="bg-[#E4E7F3] pt-20 px-[3%] pb-4">
         <div class="recent-sales bg-white p-4 rounded-md">
           <h2 class="text-[rgb(4,46,255)] font-semibold text-lg md:text-xl py-4 capitalize">Products in stock</h2>
-          <div class="table-container overflow-x-auto">
-            <table class="w-[45rem] md:w-full border-2 my-4">
-              <thead>
-                <tr>
-                  <th class="border-2 py-4 px-2">Category</th>
-                  <th class="border-2 py-4 px-2">Name</th>
-                  <th class="border-2 py-4 px-2">Image</th>
-                  <th class="border-2 py-4 px-2">Price</th>
-                  <th class="border-2 py-4 px-2">Discounted price</th>
-                  <th class="border-2 py-4 px-2">Brand</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(product, index) in products" :key="index">
-                  <td class="border-2 py-2 px-2 text-center">{{ product.productCategory }}</td>
-                  <td class="border-2 py-2 px-2 text-center">{{ product.productName }}</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img :src="product.productFirstImage" :alt="product.productName" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">${{ product.productInitialPrice }}</td>
-                  <td class="border-2 py-2 px-2 text-center">${{ product.productDiscountPrice }}</td>
-                  <td class="border-2 py-2 px-2 text-center">{{ product.brandName }}</td>
-                </tr>
-              </tbody>
-            </table>
+          <div v-if="products.length !== 0">
+              <div class="table-container overflow-x-auto">
+                <table  class="w-[45rem] md:w-full border-2 my-4">
+                  <thead>
+                    <tr>
+                      <th class="border-2 py-4 px-2">Category</th>
+                      <th class="border-2 py-4 px-2">Name</th>
+                      <th class="border-2 py-4 px-2">Image</th>
+                      <th class="border-2 py-4 px-2">Price</th>
+                      <th class="border-2 py-4 px-2">Discounted price</th>
+                      <th class="border-2 py-4 px-2">Brand</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(product, index) in products" :key="index">
+                      <td class="border-2 py-2 px-2 text-center">{{ product.productCategory }}</td>
+                      <td class="border-2 py-2 px-2 text-center">{{ product.productName }}</td>
+                      <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img :src="product.productFirstImage" :alt="product.productName" class="h-14 w-auto"></td>
+                      <td class="border-2 py-2 px-2 text-center">${{ product.productInitialPrice }}</td>
+                      <td class="border-2 py-2 px-2 text-center">${{ product.productDiscountPrice }}</td>
+                      <td class="border-2 py-2 px-2 text-center">{{ product.brandName }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-container overflow-x-auto">
+                <table class="w-[45rem] lg:w-[90%] border-2 mt-8">
+                  <thead>
+                    <tr>
+                      <th class="border-2 py-4">Product Description</th>
+                      <th class="border-2 py-4">Manage</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(product, index) in products" :key="index">
+                      <td class="border-2 py-2 px-2" v-html="product.productDescription"></td>
+                      <td class="border-2 py-2 px-6 w-1/2">
+                        <div class="flex w-full justify-between">
+                          <button @click="openModal(product)" type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
+                          <button @click="deleteProduct(product)" type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
           </div>
-          <div class="table-container overflow-x-auto">
-            <table class="w-[45rem] lg:w-[90%] border-2 mt-8">
-              <thead>
-                <tr>
-                  <th class="border-2 py-4">Product Description</th>
-                  <th class="border-2 py-4">Manage</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(product, index) in products" :key="index">
-                  <td class="border-2 py-2 px-2" v-html="product.productDescription"></td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                      <button @click="openModal(product)" type="button" class="bg-[#FFCF10] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">edit <PencilSquareIcon class="size-6"/> </button>
-                      <button type="button" class="bg-[#FF4004] inline-flex items-center gap-2 edit-button py-3 px-8 capitalize rounded-md">remove <TrashIcon class="size-6"/> </button>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <div v-else class="font-bold">There are no products in the store, kindly upload them below!</div>
         </div>
         <ProductModal :product="editProduct"/>
         </main>

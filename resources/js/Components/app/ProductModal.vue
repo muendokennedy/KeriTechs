@@ -1,5 +1,5 @@
 <script setup>
-import { PencilSquareIcon, TrashIcon, CloudArrowUpIcon, XMarkIcon } from '@heroicons/vue/24/solid'
+import { PencilSquareIcon, TrashIcon, CloudArrowUpIcon, XMarkIcon, CheckCircleIcon } from '@heroicons/vue/24/solid'
 import {isImage} from '@/helpers.js'
 import { useForm } from '@inertiajs/vue3'
 import { computed, ref, watch } from 'vue'
@@ -76,6 +76,7 @@ const submit = () => {
             formErrors.value.push(errors)
         },
         onSuccess: () => {
+            resetForm()
             emit('hide')
         },
         preserveScroll: true
@@ -85,9 +86,17 @@ const submit = () => {
         onError: (errors) => {
             formErrors.value.push(errors)
         },
+        onSuccess: () => {
+            resetForm()
+        },
         preserveScroll: true
         })
     }
+}
+
+const resetForm = () => {
+    form.reset()
+    attachmentFiles.value = []
 }
 
 async function onImageChoose(event){
@@ -102,7 +111,7 @@ async function onImageChoose(event){
         if(attachmentFiles.value.length > 4){
               setTimeout(() => {
               flashMessage.value = ''
-              }, 4000)
+              }, 8000)
               flashMessage.value = 'You must select exactly 4 images'
             attachmentFiles.value = []
             event.target.value = null
@@ -114,7 +123,7 @@ async function onImageChoose(event){
     if(attachmentFiles.value.length < 4){
         setTimeout(() => {
         flashMessage.value = ''
-        }, 4000)
+        }, 8000)
         flashMessage.value = 'You must select exactly 4 images'
         attachmentFiles.value = []
         event.target.value = null
@@ -122,7 +131,7 @@ async function onImageChoose(event){
     } else {
         flashMessage.value = ''
     }
-    console.log(computedAttachments.value)
+    console.log(attachmentFiles.value)
     event.target.value = null
   }
 
@@ -156,7 +165,12 @@ async function onImageChoose(event){
             :class="[
               !flashMessage ? '-right-[100%]' : 'right-20'
             ]">{{flashMessage}}
-              <XMarkIcon class="size-6 cursor-pointer"/>
+              <XMarkIcon @click="flashMessage = ''" class="size-6 cursor-pointer"/>
+            </div>
+            <div class="flash-message transition-all duration-300 flex gap-2 text-white bg-green-500 border-green-700 border rounded-md fixed right-20 top-20 w-[600px] p-4 z-10">
+              <CheckCircleIcon class="size-6 cursor-pointer"/>
+              <span>The product has been created successfully</span>
+              <XMarkIcon class="size-6 cursor-pointer absolute right-2"/>
             </div>
             <form @submit.prevent="submit">
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
@@ -251,7 +265,7 @@ async function onImageChoose(event){
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
                   <label for="discountPrice" class="block py-3">Enter product average rating:</label>
-                  <input type="number" v-model="form.productAverageRating" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus
+                  <input type="text" v-model="form.productAverageRating" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus
                   :class="[
                     formErrors[0]?.productAverageRating ? 'border-red-500' : ''
                   ]">

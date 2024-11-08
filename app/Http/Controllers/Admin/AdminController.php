@@ -21,7 +21,7 @@ class AdminController extends Controller
     }
     public function adminProducts()
     {
-      $products = Product::all();
+      $products = Product::latest()->get();
 
        return Inertia::render('Admin/AdminProducts', [
          'products' => ProductResource::collection($products)

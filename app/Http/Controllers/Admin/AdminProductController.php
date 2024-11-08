@@ -122,4 +122,11 @@ class AdminProductController extends Controller
 
         return back();
     }
+
+    public function deleteProduct(Product $product)
+    {
+        $product->delete();
+
+        return back();
+    }
 }
