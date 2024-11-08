@@ -24,6 +24,7 @@ class AdminController extends Controller
       $products = Product::latest()->get();
 
        return Inertia::render('Admin/AdminProducts', [
+        'success' => session('success'),
          'products' => ProductResource::collection($products)
        ]);
     }

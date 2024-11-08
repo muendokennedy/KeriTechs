@@ -9,6 +9,9 @@ const props = defineProps({
     product: {
         type: Object,
         required: true
+    },
+    success: {
+        type: String
     }
 })
 
@@ -29,6 +32,8 @@ const form = useForm({
 const attachmentFiles = ref([])
 const formErrors = ref([])
 const flashMessage = ref('')
+const showSuccessNotification = ref(false)
+
 
 watch(() => props.product, () => {
     form.productCategory = props.product.productCategory || '',
@@ -75,9 +80,9 @@ const submit = () => {
         onError: (errors) => {
             formErrors.value.push(errors)
         },
-        onSuccess: () => {
+        onSuccess: (response) => {
+            emit('hide', response)
             resetForm()
-            emit('hide')
         },
         preserveScroll: true
         })
@@ -88,6 +93,10 @@ const submit = () => {
         },
         onSuccess: () => {
             resetForm()
+            setTimeout(() => {
+                showSuccessNotification.value = false
+            }, 8000)
+            showSuccessNotification.value = true
         },
         preserveScroll: true
         })
@@ -103,10 +112,23 @@ async function onImageChoose(event){
     attachmentFiles.value = []
     for(const file of event.target.files){
 
-        const myFile = {
+      let myFile = null
+
+    try{
+      const fileData = await readFile(file)
+      myFile = {
             file,
-            src: await readFile(file)
+            src: fileData
         }
+    }catch(error){
+      setTimeout(() => {
+        flashMessage.value = ''
+        }, 8000)
+        flashMessage.value = error.message
+        attachmentFiles.value = []
+        event.target.value = null
+        return
+    }
         attachmentFiles.value.push(myFile)
         if(attachmentFiles.value.length > 4){
               setTimeout(() => {
@@ -137,17 +159,19 @@ async function onImageChoose(event){
 
 
  async function readFile(file){
-    return new Promise((res,rej) => {
-        if(isImage({mime: file.type})){
+    return new Promise((resolve,reject) => {
+            if(!isImage(file)){
+                reject(new Error('You must select an image (jpeg, jpg, png, webp)'))
+                return;
+            }
             const reader = new FileReader()
             reader.onload = () => {
-                res(reader.result)
+                resolve(reader.result)
             }
-            reader.onerror = rej
+            reader.onerror = () => {
+                reject(new Error('Error reading this file'))
+            }
             reader.readAsDataURL(file)
-        } else {
-            res(null)
-        }
     })
 }
 </script>
@@ -167,11 +191,13 @@ async function onImageChoose(event){
             ]">{{flashMessage}}
               <XMarkIcon @click="flashMessage = ''" class="size-6 cursor-pointer"/>
             </div>
-            <div class="flash-message transition-all duration-300 flex gap-2 text-white bg-green-500 border-green-700 border rounded-md fixed right-20 top-20 w-[600px] p-4 z-10">
-              <CheckCircleIcon class="size-6 cursor-pointer"/>
-              <span>The product has been created successfully</span>
-              <XMarkIcon class="size-6 cursor-pointer absolute right-2"/>
-            </div>
+            <Transition name="slide-fade">
+                <div v-show="showSuccessNotification && success" class="flash-message transition-all duration-300 flex gap-2 text-white bg-green-500 border-green-700 border rounded-md fixed right-20 top-20 w-[600px] p-4 z-10">
+                  <CheckCircleIcon class="size-6 cursor-pointer"/>
+                  <span>{{ success }}</span>
+                  <XMarkIcon @click="showSuccessNotification = false" class="size-6 cursor-pointer absolute right-2"/>
+                </div>
+            </Transition>
             <form @submit.prevent="submit">
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
@@ -296,5 +322,24 @@ async function onImageChoose(event){
         </div>
 </template>
 <style scoped>
-
+.slide-fade-enter-active,
+.slide-fade-leave-active{
+    transition: transform .3s ease, opacity .3s ease;
+}
+.slide-fade-enter-from{
+    transform: translateX(100%);
+    opacity: 0;
+}
+.slide-fade-enter-to{
+    transform: translateX(0);
+    opacity: 1;
+}
+.slide-fade-leave-from{
+    transform: translateX(0);
+    opacity: 1;
+}
+.slide-fade-leave-to{
+    transform: translateX(100%);
+    opacity: 1;
+}
 </style>

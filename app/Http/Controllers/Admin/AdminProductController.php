@@ -65,7 +65,7 @@ class AdminProductController extends Controller
             throw $e;
         }
 
-        return back();
+        return back()->with('success', 'The product has been created successfully');
     }
 
     public function updateProduct(UpdateProductRequest $request, Product $product)
@@ -120,13 +120,13 @@ class AdminProductController extends Controller
             throw $e;
         }
 
-        return back();
+        return back()->with('success', 'The product has been updated successfully');
     }
 
     public function deleteProduct(Product $product)
     {
         $product->delete();
 
-        return back();
+        return back()->with('success', 'The product has been deleted successfully');
     }
 }

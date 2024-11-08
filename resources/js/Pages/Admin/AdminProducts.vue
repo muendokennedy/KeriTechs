@@ -3,7 +3,7 @@ import AdminSidebar from '@/Components/app/AdminSidebar.vue'
 import AdminHeader from '@/Components/app/AdminHeader.vue'
 import ProductModal from '@/Components/app/ProductModal.vue'
 import {ref} from 'vue'
-import { PencilSquareIcon, TrashIcon, CloudArrowUpIcon, XMarkIcon } from '@heroicons/vue/24/solid'
+import { PencilSquareIcon, TrashIcon, CloudArrowUpIcon, XMarkIcon, CheckCircleIcon } from '@heroicons/vue/24/solid'
 import {isImage} from '@/helpers.js'
 import { useForm} from '@inertiajs/vue3'
 
@@ -11,6 +11,9 @@ const props = defineProps({
   products: {
     type: Array,
     required: true
+  },
+  success: {
+    type: String
   }
 })
 
@@ -27,10 +30,19 @@ import {
 
 const isOpen = ref(false)
 const editProduct = ref({})
+const showSuccessNotification = ref(false)
 
-function closeModal() {
+function closeModal(response) {
   isOpen.value = false
   onModalhide()
+  if(response){
+      setTimeout(() => {
+        showSuccessNotification.value = false
+      }, 8000)
+      setTimeout(() => {
+          showSuccessNotification.value = true
+      }, 800)
+  }
 }
 function openModal(product) {
   isOpen.value = true
@@ -39,6 +51,12 @@ function openModal(product) {
 
 const deleteProduct = (product) => {
     form.delete(route('admin.product.delete', product), {
+        onSuccess: () => {
+            setTimeout(() => {
+            showSuccessNotification.value = false
+        }, 8000)
+        showSuccessNotification.value = true
+        },
         preserveScroll: true
     })
 }
@@ -66,6 +84,13 @@ const onModalhide = () => {
     <section class="ml-[15rem] w-[calc(100% - 15rem)] main-content min-h-screen">
     <AdminHeader/>
       <main class="bg-[#E4E7F3] pt-20 px-[3%] pb-4">
+            <Transition name="slide-fade">
+                <div v-show="showSuccessNotification && success" class="flash-message transition-all duration-300 flex gap-2 text-white bg-green-500 border-green-700 border rounded-md fixed right-20 top-20 w-[600px] p-4 z-10">
+                  <CheckCircleIcon class="size-6 cursor-pointer"/>
+                  <span>{{ success }}</span>
+                  <XMarkIcon @click="showSuccessNotification = false" class="size-6 cursor-pointer absolute right-2"/>
+                </div>
+            </Transition>
         <div class="recent-sales bg-white p-4 rounded-md">
           <h2 class="text-[rgb(4,46,255)] font-semibold text-lg md:text-xl py-4 capitalize">Products in stock</h2>
           <div v-if="products.length !== 0">
@@ -117,7 +142,7 @@ const onModalhide = () => {
           </div>
           <div v-else class="font-bold">There are no products in the store, kindly upload them below!</div>
         </div>
-        <ProductModal :product="editProduct"/>
+        <ProductModal :product="editProduct" :success="success"/>
         </main>
     </section>
   <TransitionRoot appear :show="isOpen" as="template">
@@ -152,7 +177,7 @@ const onModalhide = () => {
             >
               <div>
 
-                <ProductModal :product="editProduct" @hide="closeModal"/>
+                <ProductModal :product="editProduct" @hide="closeModal" :success="success"/>
 
               </div>
             </DialogPanel>
@@ -162,3 +187,25 @@ const onModalhide = () => {
     </Dialog>
   </TransitionRoot>
 </template>
+<style scoped>
+.slide-fade-enter-active,
+.slide-fade-leave-active{
+    transition: transform .3s ease, opacity .3s ease;
+}
+.slide-fade-enter-from{
+    transform: translateX(100%);
+    opacity: 0;
+}
+.slide-fade-enter-to{
+    transform: translateX(0);
+    opacity: 1;
+}
+.slide-fade-leave-from{
+    transform: translateX(0);
+    opacity: 1;
+}
+.slide-fade-leave-to{
+    transform: translateX(100%);
+    opacity: 1;
+}
+</style>
