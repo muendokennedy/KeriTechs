@@ -1,6 +1,7 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link, useForm } from '@inertiajs/vue3'
 import { HomeIcon, ChartBarIcon, InboxStackIcon, ListBulletIcon, CircleStackIcon, UserIcon, Cog6ToothIcon, ArrowRightStartOnRectangleIcon } from '@heroicons/vue/24/solid'
+
 
 </script>
 <template>
@@ -34,9 +35,9 @@ import { HomeIcon, ChartBarIcon, InboxStackIcon, ListBulletIcon, CircleStackIcon
     </div>
     <div class="side-bar-bottom my-4 text-white px-4 space-y-2 capitalize">
         <ul>
-            <li><a href="logout.html">
+            <li><Link method="post" :href="route('admin.logout')">
             <ArrowRightStartOnRectangleIcon class="size-6 inline text-xl mr-3"/>
-            <span>log out</span></a></li>
+            <span>log out</span></Link></li>
         </ul>
       </div>
     </div>
